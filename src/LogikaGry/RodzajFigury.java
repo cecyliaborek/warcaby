@@ -21,4 +21,20 @@ public enum RodzajFigury {
 
         }
     }
+
+    @Override
+    public String toString() {
+        switch (this){
+            case BIALY_PIONEK:
+                return "P";
+            case CZARNY_PIONEK:
+                return "p";
+            case BIALA_KROLOWA:
+                return "Q";
+            case CZARNA_KROLOWA:
+                return "q";
+            default:
+                throw new IllegalArgumentException();
+        }
+    }
 }

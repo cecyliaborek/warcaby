@@ -2,7 +2,6 @@ package UI.Console;
 
 import LogikaGry.Gra;
 import LogikaGry.PozycjaNaPlanszy;
-import Wyjatki.GraczNieMaFigurException;
 import Wyjatki.ZabronionyRuchException;
 
 import java.util.Scanner;
@@ -22,11 +21,9 @@ public class Main {
                     gra.zrobRuch(new PozycjaNaPlanszy(r1, c1), new PozycjaNaPlanszy(r2, c2));
                 } catch (ZabronionyRuchException e) {
                     System.out.println("Idioci prawa gry w warcaby nie mają - idź kopać rowy");
-                } catch (GraczNieMaFigurException e) {
-                    System.out.println("Ty debilu - NIE MASZ PIONKÓW");
                 }
             }
-        }catch (ZabronionyRuchException e){
+        }catch (RuntimeException e){
             e.printStackTrace();
         }
     }

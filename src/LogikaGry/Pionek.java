@@ -3,10 +3,10 @@ package LogikaGry;
 import Wyjatki.BrakFiguryDoZbiciaException;
 import Wyjatki.ZabronionyRuchException;
 
-public abstract class Pionek extends Figura {
+public class Pionek extends Figura {
 
-    public Pionek(Plansza plansza, Pole pole) throws ZabronionyRuchException {
-        super(plansza, pole);
+    public Pionek(Plansza plansza, Pole pole, RodzajFigury rodzajFigury) {
+        super(plansza, pole, rodzajFigury);
     }
 
     @Override

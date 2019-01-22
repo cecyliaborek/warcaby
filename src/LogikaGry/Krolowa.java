@@ -3,16 +3,16 @@ package LogikaGry;
 import Wyjatki.BrakFiguryDoZbiciaException;
 import Wyjatki.ZabronionyRuchException;
 
-public abstract class Krolowa extends Figura {
-    public Krolowa(Plansza plansza, Pole pole) throws ZabronionyRuchException {
-        super(plansza, pole);
+public class Krolowa extends Figura {
+    public Krolowa(Plansza plansza, Pole pole, RodzajFigury rodzajFigury) {
+        super(plansza, pole, rodzajFigury);
     }
 
     @Override
     public boolean czyMozliweZbicie(Pole pole) {
         try{
             if(poleZbijane(pole) != null){
-                PozycjaNaPlanszy obecnaPozycja = this.pole.pozycja;
+                PozycjaNaPlanszy obecnaPozycja = this.pole.getPozycja();
                 if(Math.abs(obecnaPozycja.roznicaMiedzyKolumnami(pole.getPozycja())) == Math.abs(obecnaPozycja.roznicaMiedzyRzedami(pole.getPozycja()))){
                     int kierunekRzedy = obecnaPozycja.roznicaMiedzyRzedami(pole.getPozycja())/Math.abs(obecnaPozycja.roznicaMiedzyRzedami(pole.getPozycja()));
                     int kierunekKolumny = obecnaPozycja.roznicaMiedzyKolumnami(pole.getPozycja())/Math.abs(obecnaPozycja.roznicaMiedzyKolumnami(pole.getPozycja()));
@@ -48,7 +48,7 @@ public abstract class Krolowa extends Figura {
 
     @Override
     public boolean czyMozliwyRuchBezZbicia(Pole pole){
-        PozycjaNaPlanszy obecnaPozycja = this.pole.pozycja;
+        PozycjaNaPlanszy obecnaPozycja = this.pole.getPozycja();
         if(Math.abs(obecnaPozycja.roznicaMiedzyKolumnami(pole.getPozycja())) == Math.abs(obecnaPozycja.roznicaMiedzyRzedami(pole.getPozycja()))){
             int kierunekRzedy = obecnaPozycja.roznicaMiedzyRzedami(pole.getPozycja())/Math.abs(obecnaPozycja.roznicaMiedzyRzedami(pole.getPozycja()));
             int kierunekKolumny = obecnaPozycja.roznicaMiedzyKolumnami(pole.getPozycja())/Math.abs(obecnaPozycja.roznicaMiedzyKolumnami(pole.getPozycja()));

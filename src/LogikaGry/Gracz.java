@@ -1,10 +1,8 @@
 package LogikaGry;
 
-import Wyjatki.GraczNieMaFigurException;
-
 public class Gracz {
-    protected String nazwa;
-    protected int liczbaFigur;
+    private String nazwa;
+    private int liczbaFigur;
 
     public Gracz(String nazwa, int liczbaFigur){
         this.nazwa = nazwa;
@@ -23,8 +21,7 @@ public class Gracz {
         return liczbaFigur > 0;
     }
 
-    public void zmniejszLiczbeFigur() throws GraczNieMaFigurException {
-        if(!czyMaFigury()) throw new GraczNieMaFigurException();
+    public void zmniejszLiczbeFigur()  {
         this.liczbaFigur --;
     }
 }

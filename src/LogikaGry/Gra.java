@@ -1,18 +1,17 @@
 package LogikaGry;
 
-import Wyjatki.GraczNieMaFigurException;
 import Wyjatki.WybranaFiguraZlegoGraczaException;
 import Wyjatki.ZabronionyRuchException;
 
 import java.util.HashMap;
 
 public class Gra {
-    protected Plansza plansza;
-    protected HashMap<Kolor, Gracz> gracze = new HashMap<>();
+    private Plansza plansza;
+    private HashMap<Kolor, Gracz> gracze = new HashMap<>();
 
-    protected Kolor kolorObecnegoGracza = Kolor.BIALY;
+    private Kolor kolorObecnegoGracza = Kolor.BIALY;
 
-    public Gra(String nazwaBialegoGracza, String nazwaCzarnegoGracza) throws ZabronionyRuchException {
+    public Gra(String nazwaBialegoGracza, String nazwaCzarnegoGracza) {
         this.plansza = new Plansza();
         this.gracze.put(Kolor.BIALY, new Gracz(nazwaBialegoGracza, 12));
         this.gracze.put(Kolor.CZARNY, new Gracz(nazwaCzarnegoGracza, 12));
@@ -20,7 +19,7 @@ public class Gra {
 
     //public void zarejestrujRuch(PozycjaNaPlanszy zPoz, PozycjaNaPlanszy doPoz){}
 
-    public void zrobRuch(PozycjaNaPlanszy zPoz, PozycjaNaPlanszy doPoz) throws ZabronionyRuchException, GraczNieMaFigurException {
+    public void zrobRuch(PozycjaNaPlanszy zPoz, PozycjaNaPlanszy doPoz) throws ZabronionyRuchException {
         if(this.plansza.getPole(zPoz) == null || this.plansza.getPole(zPoz).getFigura() == null)throw new ZabronionyRuchException();
         if(this.plansza.getPole(zPoz).getFigura().getKolor() != kolorObecnegoGracza) throw new WybranaFiguraZlegoGraczaException();
         if(this.plansza.zrobRuchOrazCzyByloBicie(plansza.getPole(zPoz), plansza.getPole(doPoz)))this.gracze.get(this.kolorObecnegoGracza).zmniejszLiczbeFigur();

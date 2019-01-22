@@ -1,6 +1,5 @@
 package LogikaGry;
 
-import Wyjatki.BrakFiguryDoZbiciaException;
 import Wyjatki.ZabronionyRuchException;
 
 public abstract class Figura {
@@ -8,10 +7,15 @@ public abstract class Figura {
     protected Pole pole;
     protected RodzajFigury rodzajFigury;
 
-    public Figura(Plansza plansza, Pole pole) throws ZabronionyRuchException {
-        this.plansza = plansza;
-        this.pole = pole;
-        this.pole.przesunFigureNaPole(this);
+    public Figura(Plansza plansza, Pole pole, RodzajFigury rodzajFigury) {
+        try {
+            this.plansza = plansza;
+            this.pole = pole;
+            this.pole.przesunFigureNaPole(this);
+            this.rodzajFigury = rodzajFigury;
+        }catch (ZabronionyRuchException e){
+            throw new RuntimeException(e);
+        }
     }
     public abstract boolean czyMozliwyRuchBezZbicia(Pole pole);
     public abstract Pole poleZbijane(Pole poleNa) throws ZabronionyRuchException;
@@ -24,8 +28,7 @@ public abstract class Figura {
 
     public boolean czyMozliweZbicie(Pole pole){
         try{
-            if(poleZbijane(pole) != null) return true;
-            return false;
+            return poleZbijane(pole) != null;
         }catch (ZabronionyRuchException e){
             return false;
         }
@@ -43,5 +46,14 @@ public abstract class Figura {
             this.pole = poleNa;
         }
         else throw new ZabronionyRuchException();
+    }
+
+    public RodzajFigury getRodzajFigury() {
+        return rodzajFigury;
+    }
+
+    @Override
+    public String toString(){
+        return this.rodzajFigury.toString();
     }
 }

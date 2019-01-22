@@ -5,40 +5,40 @@ import Wyjatki.ZabronionyRuchException;
 import java.util.HashMap;
 
 public class Plansza {
-    protected final int szerokosc = 8;
-    protected final int wysokosc = 8;
+    private final int szerokosc = 8;
+    private final int wysokosc = 8;
 
-    protected HashMap<PozycjaNaPlanszy, Pole> pola = new HashMap<>();
+    private HashMap<PozycjaNaPlanszy, Pole> pola = new HashMap<>();
 
-    public Plansza() throws ZabronionyRuchException {
-        for(int r = 0; r < wysokosc; r++){
-            for(int c = 0; c < szerokosc; c++){
+    public Plansza() {
+        for (int r = 0; r < wysokosc; r++) {
+            for (int c = 0; c < szerokosc; c++) {
                 PozycjaNaPlanszy pozycja = new PozycjaNaPlanszy(r, c);
                 pola.put(pozycja, new Pole(pozycja));
             }
         }
-        for(int c = 0; c < 4; c++){
-            new BialyPionek(this, pola.get(new PozycjaNaPlanszy(0, 2 * c)));
-            new BialyPionek(this, pola.get(new PozycjaNaPlanszy(1, 2 * c + 1)));
-            new BialyPionek(this, pola.get(new PozycjaNaPlanszy(2, 2 * c)));
+        for (int c = 0; c < 4; c++) {
+            new Pionek(this, pola.get(new PozycjaNaPlanszy(0, 2 * c)), RodzajFigury.BIALY_PIONEK);
+            new Pionek(this, pola.get(new PozycjaNaPlanszy(1, 2 * c + 1)), RodzajFigury.BIALY_PIONEK);
+            new Pionek(this, pola.get(new PozycjaNaPlanszy(2, 2 * c)), RodzajFigury.BIALY_PIONEK);
         }
 
-        for(int c = 0; c < 4; c++){
-            new CzarnyPionek(this, pola.get(new PozycjaNaPlanszy(5, 2 * c + 1)));
-            new CzarnyPionek(this, pola.get(new PozycjaNaPlanszy(6, 2 * c)));
-            new CzarnyPionek(this, pola.get(new PozycjaNaPlanszy(7, 2 * c + 1)));
+        for (int c = 0; c < 4; c++) {
+            new Pionek(this, pola.get(new PozycjaNaPlanszy(5, 2 * c + 1)), RodzajFigury.CZARNY_PIONEK);
+            new Pionek(this, pola.get(new PozycjaNaPlanszy(6, 2 * c)), RodzajFigury.CZARNY_PIONEK);
+            new Pionek(this, pola.get(new PozycjaNaPlanszy(7, 2 * c + 1)), RodzajFigury.CZARNY_PIONEK);
         }
     }
 
-    public void zamienPionkaWKrolowaJesliJestNaOdpowiednimPolu(PozycjaNaPlanszy pozycjaPionka) throws ZabronionyRuchException{
+    public void zamienPionkaWKrolowaJesliJestNaOdpowiednimPolu(PozycjaNaPlanszy pozycjaPionka){
         Pole polePionka = this.pola.get(pozycjaPionka);
-        if(pozycjaPionka.getRzad() == 0 && this.pola.get(pozycjaPionka).getFigura() instanceof CzarnyPionek){
+        if(pozycjaPionka.getRzad() == 0 && this.pola.get(pozycjaPionka).getFigura().getRodzajFigury() == RodzajFigury.CZARNY_PIONEK){
             polePionka.ustawPuste();
-            new CzarnaKrolowa(this, polePionka);
+            new Krolowa(this, polePionka, RodzajFigury.CZARNA_KROLOWA);
         }
-        else if(pozycjaPionka.getRzad() == wysokosc - 1 && this.pola.get(pozycjaPionka).getFigura() instanceof BialyPionek){
+        else if(pozycjaPionka.getRzad() == wysokosc - 1 && this.pola.get(pozycjaPionka).getFigura().getRodzajFigury() == RodzajFigury.BIALY_PIONEK){
             polePionka.ustawPuste();
-            new BialaKrolowa(this, polePionka);
+            new Krolowa(this, polePionka, RodzajFigury.BIALA_KROLOWA);
         }
 
     }

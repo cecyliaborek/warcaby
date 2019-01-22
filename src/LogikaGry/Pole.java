@@ -3,8 +3,8 @@ package LogikaGry;
 import Wyjatki.ZabronionyRuchException;
 
 public class Pole {
-    protected Figura figura = null;
-    protected PozycjaNaPlanszy pozycja;
+    private Figura figura = null;
+    private PozycjaNaPlanszy pozycja;
 
     public Pole(PozycjaNaPlanszy pozycja){
         this.pozycja = pozycja;
